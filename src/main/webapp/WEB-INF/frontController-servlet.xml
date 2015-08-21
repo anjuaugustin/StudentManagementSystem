@@ -12,7 +12,7 @@
 
 <mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven /> <!-- For adding more features to annotation driven controllers. -->
-	<context:component-scan base-package="com.nsl.eds.web" /> <!-- Registers the classes from the given packages as controllers. -->
+	<context:component-scan base-package="com.qburst.sms.web" /> <!-- Registers the classes from the given packages as controllers. -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
@@ -24,14 +24,10 @@
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
-				<value>resources/errors</value>
-				<value>resources/messages</value>
+				<value>resources/errors_en</value>
+				<value>resources/messages_en</value>
 			</list>
 		</property>
 	</bean>
-	<bean id="multipartResolver"
-    		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	    <!-- one of the properties available; the maximum file size in bytes -->
-	    <property name="maxUploadSize" value="5120" />
-	</bean>
+
 </beans>
