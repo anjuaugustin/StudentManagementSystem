@@ -1,20 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.qburst.sms</groupId>
-	<artifactId>StudentManagementSystem</artifactId>
+	<groupId>com.sms.qburst</groupId>
+	<artifactId>SMS</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>StudentManagementSystem Maven Webapp</name>
+	<name>SMS Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<jdk.version>1.8</jdk.version>
-		<spring.version>4.1.6.RELEASE</spring.version>
+		<spring.version>4.1.5.RELEASE</spring.version>
+		<jpa.version>4.3.8.Final</jpa.version>
 		<jstl.version>1.2</jstl.version>
+		<jcl-over-slf4j.version>1.7.10</jcl-over-slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
-		<junit.version>4.11</junit.version>
-		<logback.version>1.0.13</logback.version>
-		<jcl-over-slf4j.version>1.7.5</jcl-over-slf4j.version>
+		<flume.version>1.6.0</flume.version>
+				
+		<mysqlconnector.version>5.1.34</mysqlconnector.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -54,6 +56,12 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!-- JPA with Hibernate as provider -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${jpa.version}</version>
+		</dependency>
 		<!-- Commons logging over slfj4 and log4j -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -69,7 +77,6 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<!-- jstl -->
 		<dependency>
@@ -90,28 +97,103 @@
 			<version>2.2</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- Unit Testing dependencies -->
+		<!-- Jackson -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		<!-- Hibernate Validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.1.3.Final</version>
+		</dependency>
+		
+		<!-- Commons -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+		<!-- DBCP -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1</version>
+		</dependency>
+		
+		
+		
+		<!-- Mysql connector -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysqlconnector.version}</version>
+		</dependency>
+		<!-- PostgreSQL driver -->
+		<!--dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
+			<version>9.3-1100-jdbc41</version> </dependency -->
+		<!-- Cassandra Driver -->
+		<!--dependency> <groupId>org.apache-extras.cassandra-jdbc</groupId> <artifactId>cassandra-jdbc</artifactId> 
+			<version>1.2.1</version> </dependency -->
+		<!-- ORACLE database driver -->
+		<!-- mvn install:install-file -Dfile={Path/to/your/ojdbc.jar} -DgroupId=com.oracle 
+			-DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar http://www.mkyong.com/maven/how-to-add-oracle-jdbc-driver-in-your-maven-local-repository/ -->
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc6</artifactId> 
+			<version>11.2.0</version> </dependency> -->
+		<!-- SqlServer database driver -->
+		<!-- mvn install:install-file -Dfile=sqljdbc4.jar -DgroupId=com.microsoft.sqlserver 
+			-DartifactId=sqljdbc4 -Dversion=4.0 -Dpackaging=jar http://stackoverflow.com/questions/6942407/setting-up-maven-dependency-for-sql-server -->
+		<!-- <dependency> <groupId>com.microsoft.sqlserver</groupId> <artifactId>sqljdbc4</artifactId> 
+			<version>4.0</version> </dependency> -->
+
+		
+		
+		
+		<dependency>
+			<groupId>org.apache.flume</groupId>
+			<artifactId>flume-ng-node</artifactId>
+			<version>${flume.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-core</artifactId>
-		    <version>2.0.8-beta</version>
-		    <scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
+			<groupId>org.apache.oozie</groupId>
+			<artifactId>oozie-core</artifactId>
+			<version>4.1.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>servlet-api-2.5</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-el</groupId>
+					<artifactId>commons-el</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>jetty</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jdom</groupId>
+					<artifactId>jdom</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xerces</groupId>
+					<artifactId>xercesImpl</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
+
+
 	<build>
-		<finalName>StudentManagementSystem</finalName>
+		<finalName>SMS</finalName>
 		<plugins>
 			<!-- Eclipse project -->
 			<plugin>
@@ -126,7 +208,6 @@
 					<wtpversion>2.0</wtpversion>
 				</configuration>
 			</plugin>
-
 			<!-- Set JDK Compiler Level -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -137,14 +218,13 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-
 			<!-- For Maven Tomcat Plugin -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
+				<artifactId>tomcat8-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<path>/StudentManagementSystem</path>
+					<path>/SMS</path>
 				</configuration>
 			</plugin>
 		</plugins>
