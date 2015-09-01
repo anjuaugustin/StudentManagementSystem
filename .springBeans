@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.7.0.201506251244-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+		<config>src/main/webapp/WEB-INF/dao-definition.xml</config>
+		<config>bin/src/main/webapp/WEB-INF/frontController-servlet.xml</config>
+		<config>java:com.qburst.sms.student.service.StudentServiceImpl</config>
+	</configs>
+	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring-security.xml</config>
+		<config>src/main/webapp/WEB-INF/frontController-servlet.xml</config>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>
