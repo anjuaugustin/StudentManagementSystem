@@ -15,7 +15,7 @@ import com.qburst.sms.student.service.StudentService;
 
 @Controller
 public class HomeController {
-
+	
 	@Autowired
 	private StudentService<Student> studentService;
 	
@@ -51,16 +51,16 @@ public class HomeController {
 		//} 
 	
 		model.addAttribute("persons", listUser);
-		return "home";
+		return "studentmanagement";
 	}
 
-	@RequestMapping(value = "/admin/addPerson", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/addStudent", method = RequestMethod.POST)
 	public String addperson(@ModelAttribute Student student) {
 		studentService.save(student);
 		return "redirect:/admin/studentmanagement";
 	}
 
-	@RequestMapping(value = "/admin/deletePerson")
+	@RequestMapping(value = "/admin/deleteStudent")
 	public String deletePerson(@ModelAttribute Student student, @RequestParam int id) {
 
 		studentService.deleteById(Student.class, id);

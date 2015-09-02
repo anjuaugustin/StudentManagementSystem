@@ -34,12 +34,12 @@
     Aggregate: ${person.aggregate} 
     Subject: ${person.stream} 
     password: ${person.password} 
-    <a href="deletePerson?id=${person.id}">Remove</a>
+    <a href="deleteStudent?id=${person.id}">Remove</a>
 		<br />
 	</c:forEach>
 
 	<h1>Add New</h1>
-	<form method="post" action="addPerson">
+	<form method="post" action="addStudent">
 		<table>
 			<tr>
 				<td>Name</td>
