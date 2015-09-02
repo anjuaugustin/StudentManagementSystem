@@ -28,7 +28,8 @@
 				<a href="javascript:formSubmit()"> Logout</a>
 			</div>
 			<h2>Welcome : ${pageContext.request.userPrincipal.name}</h2>
-			<a href="admin/studentmanagement">Student Management</a>
+			<a href="admin/studentmanagement">Student Management</a><br>
+			<a href="admin/facultymanagement">Faculty Management</a><br>
 		</c:if>
 	</sec:authorize>
 </body>

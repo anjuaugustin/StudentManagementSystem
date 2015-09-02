@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Student Management</title>
+<title>Faculty Management</title>
 </head>
 <body>
 	<c:url value="/j_spring_security_logout" var="logoutUrl" />
@@ -27,39 +27,48 @@
 		<a href="../admin">Home</a>
 	
 	</p>
-	<h1>All Students</h1>
+	<h1>All Faculties</h1>
 	<c:forEach var="person" items="${persons}">
-    studentId: ${person.studentID} 
-    Name: ${person.name} 
-    Aggregate: ${person.aggregate} 
-    Subject: ${person.stream} 
-    password: ${person.password} 
-    <a href="deleteStudent?id=${person.id}">Remove</a>
+    Name: ${person.username} 
+    Full Name: ${person.fullname} 
+    Permanent Address: ${person.permanentaddress} 
+    Present Address: ${person.presentaddress} 
+    Date of Birth: ${person.dob} 
+    Mobile Number: ${person.mob}
+    <a href="deleteFaculty?id=${person.id}">Remove</a>
 		<br />
 	</c:forEach>
 
 	<h1>Add New</h1>
-	<form method="post" action="addStudent">
+	<form method="post" action="addFaculty">
 		<table>
 			<tr>
-				<td>Name</td>
-				<td><input type="text" name="name" /><br></td>
-			</tr>
-			<tr>
-				<td>StudentID</td>
-				<td><input type="text" name="studentID" /><br></td>
+				<td>Username</td>
+				<td><input type="text" name="username" /><br></td>
 			</tr>
 			<tr>
 				<td>Password</td>
 				<td><input type="text" name="password" /><br></td>
 			</tr>
 			<tr>
-				<td>Subject</td>
-				<td><input type="text" name="stream" /><br></td>
+				<td>Full Name</td>
+				<td><input type="text" name="fullname" /><br></td>
 			</tr>
 			<tr>
-				<td>Aggregate</td>
-				<td><input type="text" name="Aggregate" /><br></td>
+				<td>Permanent Address</td>
+				<td><input type="text" name="permanentaddress" /><br></td>
+			</tr>
+			<tr>
+				<td>Present Address</td>
+				<td><input type="text" name="presentaddress" /><br></td>
+			</tr>
+			<tr>
+				<td>Date of Birth</td>
+				<td><input type="text" name="dob" /><br></td>
+			</tr>
+			<tr>
+				<td>Mobile</td>
+				<td><input type="text" name="mob" /><br></td>
 			</tr>
 			<tr>
 				<td></td>
