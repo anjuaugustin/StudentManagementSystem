@@ -25,10 +25,20 @@ public class HomeController {
 		return "welcome";
 	}
 	
-	@RequestMapping(value="/homepage",method = RequestMethod.GET)
+	@RequestMapping(value="/admin",method = RequestMethod.GET)
 	public String adminhome()
 	{
-		return "homepage";
+		return "adminhome";
+	}
+	@RequestMapping(value="/faculty",method = RequestMethod.GET)
+	public String facultyhome()
+	{
+		return "facultyhome";
+	}
+	@RequestMapping(value="/student",method = RequestMethod.GET)
+	public String studenthome()
+	{
+		return "studenthome";
 	}
 	
 	@RequestMapping(value = "/admin/studentmanagement", method = RequestMethod.GET)

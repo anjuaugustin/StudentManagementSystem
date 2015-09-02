@@ -6,11 +6,15 @@
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
-
+		<intercept-url pattern="/student/*" access="hasRole('ROLE_STUDENT')" />
+		<intercept-url pattern="/faculty/*" access="hasRole('ROLE_FACULTY')" />
 
 		<form-login login-page="/login" default-target-url="/homepage"
-			authentication-failure-url="/login?error" username-parameter="j_username"
+			authentication-success-handler-ref="customSuccessHandler"
+			authentication-failure-url="/login?error" 
+			username-parameter="j_username"
 			password-parameter="j_password" />
 		<logout logout-success-url="/login?logout" />
 		<!-- enable csrf protection -->
@@ -20,11 +24,12 @@
 	<authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
+		
 				users-by-username-query="select username,password, enabled from users where username=?"
 				authorities-by-username-query="select username,role from user_roles where username =?" />
 		</authentication-provider>
 	</authentication-manager>
 
-
+<beans:bean id="customSuccessHandler" class="com.qburst.sms.utils.CustomSuccessHandler" />
 
 </beans:beans>

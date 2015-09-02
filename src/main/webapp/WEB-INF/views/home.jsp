@@ -24,7 +24,7 @@
 		</p>
 	</c:if>
 	<p align="left">
-		<a href="../homepage">Home</a>
+		<a href="../admin">Home</a>
 	
 	</p>
 	<h1>All Students</h1>
