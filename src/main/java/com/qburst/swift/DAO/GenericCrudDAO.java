@@ -13,7 +13,7 @@ public interface GenericCrudDAO<T> {
 	void delete(T entity);
 
 	void deleteById(Class<T> clazz, Serializable id);
-
+	
 	T findById(Class<T> clazz, Serializable id);
 
 	List<?> list(Class<T> clazz);
