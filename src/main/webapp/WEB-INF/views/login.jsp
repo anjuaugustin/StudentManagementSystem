@@ -2,77 +2,36 @@
 <%@page session="true"%>
 <html>
 <head>
-<title>Login Page</title>
-<style>
-.error {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1;
-}
-
-.msg {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #31708f;
-	background-color: #d9edf7;
-	border-color: #bce8f1;
-}
-
-#login-box {
-	width: 300px;
-	padding: 20px;
-	margin: 100px auto;
-	background: #fff;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border: 1px solid #000;
-}
-</style>
+	<title>Log in Page</title>
+   <link href="<c:url value="/resources/themes/login/css/login.css"/>" rel="stylesheet" type="text/css">
 </head>
 <body onload='document.loginForm.username.focus();'>
-
-	<h1>Login Form </h1>
-
-	<div id="login-box">
-
-		<h3>Login with Username and Password</h3>
-
-		<c:if test="${not empty error}">
+<div class="login">
+  <div class="heading">
+    <h2>Log in</h2>
+    <c:if test="${not empty error}">
 			<div class="error">${error}</div>
 		</c:if>
 		<c:if test="${not empty msg}">
 			<div class="msg">${msg}</div>
 		</c:if>
+    <form action="<c:url value='/j_spring_security_check' />" method='POST'>
 
-		<form name='loginForm'
-			action="<c:url value='/j_spring_security_check' />" method='POST'>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input type="text" class="form-control" placeholder="Username or email" name='j_username'>
+          </div>
 
-			<table>
-				<tr>
-					<td>User:</td>
-					<td><input type='text' name='j_username'></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type='password' name='j_password' /></td>
-				</tr>
-				<tr>
-					<td colspan='2'><input name="submit" type="submit"
-						value="submit" /></td>
-				</tr>
-			</table>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <input type="password" class="form-control" placeholder="Password" name='j_password'>
+        </div>
 
-			<input type="hidden" name="${_csrf.parameterName}"
+        <button type="submit" class="float" name="submit" value="submit">Login</button>
+        <input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
-
-		</form>
-	</div>
-
+       </form>
+ 		</div>
+ </div>
 </body>
 </html>
