@@ -1,82 +1,36 @@
 package com.qburst.sms.domain;
 
-import java.util.Date;
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+@NamedQuery(name = "Faculty.getSearchedFaculty", query = "SELECT ai FROM Faculty ai "
+		+ "WHERE ai.facultyName = :facultyName")
 
 @Entity
 @Table(name = "Faculty")
-public class Faculty {
+
+public class Faculty implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String username;
-	private String password;
-	private String fullname;
-	private String permanentaddress;
-	private String presentaddress;
-	private Date dob;
-	private int mob;
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getFullname() {
-		return fullname;
-	}
-
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-
-	public String getPermanentaddress() {
-		return permanentaddress;
-	}
-
-	public void setPermanentaddress(String permanentaddress) {
-		this.permanentaddress = permanentaddress;
-	}
-
-	public String getPresentaddress() {
-		return presentaddress;
-	}
-
-	public void setPresentaddress(String presentaddress) {
-		this.presentaddress = presentaddress;
-	}
-
-	public Date getDob() {
-		return dob;
-	}
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-
-	public int getMob() {
-		return mob;
-	}
-
-	public void setMob(int mob) {
-		this.mob = mob;
-	}
+	private int facultyID;
+	private String facultyName;
+	private String dateOfBirth;
+	private String place;
+	private int yearsOfExperience;
+	private String specialisation;
+	private String educationalQualification;
+	private int contactNumber;
+	private String address;
 
 	public int getId() {
 		return id;
@@ -85,4 +39,85 @@ public class Faculty {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public int getFacultyID() {
+		return facultyID;
+	}
+
+	public void setFacultyID(int facultyID) {
+		this.facultyID = facultyID;
+	}
+
+	public String getFacultyName() {
+		return facultyName;
+	}
+
+	public void setFacultyName(String facultyName) {
+		this.facultyName = facultyName;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public int getYearsOfExperience() {
+		return yearsOfExperience;
+	}
+
+	public void setYearsOfExperience(int yearsOfExperience) {
+		this.yearsOfExperience = yearsOfExperience;
+	}
+
+	public String getSpecialisation() {
+		return specialisation;
+	}
+
+	public void setSpecialisation(String specialisation) {
+		this.specialisation = specialisation;
+	}
+
+	public String getEducationalQualification() {
+		return educationalQualification;
+	}
+
+	public void setEducationalQualification(String educationalQualification) {
+		this.educationalQualification = educationalQualification;
+	}
+
+	public int getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(int contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Faculty [id=" + id + ",facultyName=" + facultyName + ", facultyID=" + facultyID + ",dateOfBirth="
+				+ dateOfBirth + ", place=" + place + ",yearsOfExperience=" + yearsOfExperience + ",specialisation="
+				+ specialisation + ", educationalQualification =" + educationalQualification + ",contactNumber="
+				+ contactNumber + ",address=" + address + "]";
+	}
+
 }

@@ -7,4 +7,6 @@ import com.qburst.swift.DAO.GenericCrudDAO;
 @Service
 public interface FacultyService<T> extends GenericCrudDAO<T> {
 
+	T getSearchedFaculty(String facultyName);
+
 }
