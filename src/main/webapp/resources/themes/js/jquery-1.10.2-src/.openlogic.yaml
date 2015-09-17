@@ -1,0 +1,20 @@
+---
+package_id: jquery
+package_version: 1.10.2
+distribution_raw_file: 1.10.2/jquery-1.10.2.js
+distribution_type: src
+distribution_flavor: ''
+platform_id: all
+platform_vendor: all
+platform_version: all
+platform_arch: all
+name: jQuery 1.10.2 Source
+description: jQuery 1.10.2 Source
+distribution_notes: ''
+notify: 'yes'
+distribution_version: 1
+distribution_file_uuid_string: openlogic-jquery-1.10.2-all-src-1
+release_date: '2013-07-15'
+distribution_file_uuid: !binary |-
+  OTlhODIxMzJjODE1MzcwMjFiZWNkNmYxZjg3NjEwYmJhZTVkZTA5OWExNTVi
+  ZjM4ZWRjYTgwYjdiZDZmNDZiOQ==
