@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qburst.sms.Faculty.service.FacultyService;
+import com.qburst.sms.faculty.service.FacultyService;
 import com.qburst.sms.domain.Faculty;
 import com.qburst.sms.domain.Student;
 import com.qburst.sms.student.service.StudentService;
@@ -34,10 +34,7 @@ public class HomeController {
 		return "adminhome";
 	}
 
-	@RequestMapping(value = "/faculty", method = RequestMethod.GET)
-	public String facultyhome() {
-		return "facultyhome";
-	}
+	
 
 	@RequestMapping(value = "/student", method = RequestMethod.GET)
 	public String studenthome() {
