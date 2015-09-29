@@ -5,9 +5,13 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/" access="permitAll" />
-		<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
+	<http auto-config="true" use-expressions="true" create-session="always">
+		<intercept-url pattern="/" access="permitAll"
+			requires-channel="any" />
+		<intercept-url pattern="/login**" access="permitAll"
+			requires-channel="http" />
+		<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"
+			requires-channel="https" />
 		<intercept-url pattern="/student/*" access="hasRole('ROLE_STUDENT')" />
 		<intercept-url pattern="/faculty/*" access="hasRole('ROLE_FACULTY')" />
 
@@ -15,28 +19,40 @@
 			authentication-success-handler-ref="customSuccessHandler"
 			authentication-failure-url="/login?error" username-parameter="j_username"
 			password-parameter="j_password" />
-		<logout logout-success-url="/login?logout" />
+		<logout invalidate-session="true" logout-success-url="/login?logout"
+			logout-url="/j_spring_security_logout" delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" />
+		<!-- <remember-me key="uniqueAndSecret" token-validity-seconds="86400" 
+			/> -->
 		<!-- enable csrf protection -->
 		<csrf />
+		<session-management session-fixation-protection="migrateSession">
+			<concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="true" expired-url="/login?sessionexpired" />
+		</session-management>
+		<port-mappings>
+			<!-- Default ports -->
+			<port-mapping http="80" https="443" />
+			<!-- Websphere default ports -->
+			<port-mapping http="9080" https="9443" />
+			<!-- Tomcat default ports -->
+			<port-mapping http="8080" https="8443" />
+			<!-- Jetty custom ports -->
+			<port-mapping http="7777" https="7443" />
+		</port-mappings>
+		<!-- enable remember me -->
+		<remember-me data-source-ref="dataSource" />
 	</http>
 
 	<authentication-manager>
 		<authentication-provider>
-			<!-- <password-encoder ref='passwordEncoderBean'> -->
-			<!-- <salt-source user-property='username' /> -->
-			<!-- </password-encoder> -->
-<!-- 			<password-encoder ref="bcryptEncoder" /> -->
+			<password-encoder hash="bcrypt" />
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="select username,password, enabled from users where username=?"
 				authorities-by-username-query="select username,role from user_roles where username =?" />
 		</authentication-provider>
 	</authentication-manager>
 
-	<beans:bean id="customSuccessHandler" class="com.qburst.sms.utils.CustomSuccessHandler" />
-	<!-- <beans:bean id="passwordEncoderBean" -->
-	<!-- class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"> -->
-	<!-- <beans:constructor-arg value="512" /> -->
-	<!-- </beans:bean> -->
-<!-- 	<beans:bean id="bcryptEncoder" -->
-<!-- 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> -->
+	<beans:bean id="customSuccessHandler" class="com.qburst.sms.security.CustomSuccessHandler" />
+
 </beans:beans>
+	
