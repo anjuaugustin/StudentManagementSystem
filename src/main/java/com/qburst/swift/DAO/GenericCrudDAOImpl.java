@@ -26,7 +26,7 @@ public class GenericCrudDAOImpl<T> implements GenericCrudDAO<T> {
 	public T saveOrUpdate(T entity) {
 		return entityManager.merge(entity);
 	}
-
+	@Transactional
 	@Override
 	public T update(T entity) {
 		return entityManager.merge(entity);
